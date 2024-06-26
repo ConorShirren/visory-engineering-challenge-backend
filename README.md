@@ -2,6 +2,7 @@
 
 Hey there 👋 Thanks for taking the time to code review my work - looking forward to your feedback 🙂
 
+# Architecture Design
 
 ### Further Improvements
 
