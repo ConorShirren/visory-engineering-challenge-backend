@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Resources:
+  GetTicketmasterEventsFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: 'src/ticketmasterEventService/handler.handler'
+      Runtime: 'nodejs18.x'
+      Timeout: 10
+      MemorySize: 1024
+      Events:
+        Api:
+          Type: 'Api'
+          Properties:
+            Path: '/getTicketmasterEvents'
+            Method: 'get'
+
+ 

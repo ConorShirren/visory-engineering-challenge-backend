@@ -1,0 +1,26 @@
+{
+  "name": "visory-engineering-challenge-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ConorShirren/visory-engineering-challenge-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ConorShirren/visory-engineering-challenge-backend/issues"
+  },
+  "homepage": "https://github.com/ConorShirren/visory-engineering-challenge-backend#readme",
+  "dependencies": {
+    "aws-sdk": "^2.1624.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

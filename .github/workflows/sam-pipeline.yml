@@ -1,0 +1,37 @@
+name: Deploy SAM Application on merge to main
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - name: Set up SAM CLI
+        uses: aws-actions/setup-sam@v1
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Build SAM application
+        run: sam build
+
+      - name: Deploy SAM application
+        run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name visory-engineering-challenge-backend --region us-east-1 
