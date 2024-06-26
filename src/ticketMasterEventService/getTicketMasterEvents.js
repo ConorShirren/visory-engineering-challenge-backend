@@ -1,10 +1,12 @@
-const TICKETMASTER_API_URL =
-  'https://app.ticketmaster.com/discovery/v2/events?apikey=JJmex3yw0A2XltAAH8mGG8NN6htWhZjG&locale=*';
+const TICKETMASTER_API_URL = 'https://app.ticketmaster.com/discovery/v2/events';
+const { retrieveApiKey } = require('../utils/secretManager');
 
 const getTicketMasterEvents = async (event) => {
   try {
+    const apiKey = await retrieveApiKey();
     // Parsing incoming event data
-    const { location } = JSON.parse(event.body);
+    const { location, startDateTime, endDateTime } =
+      event.queryStringParameters;
 
     // Input validation
     if (!location) {
@@ -17,27 +19,24 @@ const getTicketMasterEvents = async (event) => {
     }
 
     // Constructing URL for CoinGecko API
-    const url = `${TICKETMASTER_API_URL}`;
+    const url = `${TICKETMASTER_API_URL}?apiKey=${apiKey}&countryCode=${location}&startDateTime=${startDateTime}&endDateTime${endDateTime}`;
 
     // Fetching events price from Ticketmaster API
-    // const response = await fetch(url);
+    const response = await fetch(url);
 
-    // // Handling fetch errors
-    // if (!response.ok) {
-    //   throw new Error('Failed to fetch events from ticketmaster');
-    // }
+    // Handling fetch errors
+    if (!response.ok) {
+      throw new Error('Failed to fetch events from ticketmaster');
+    }
 
-    // // Parsing response data
-    // const data = await response.json();
-
-    // Validating response
-
-    // Parse and return repsonse
+    // Parsing response data
+    const data = await response.json();
+    const events = data._embedded.events;
 
     // Returning success response
     return {
       statusCode: 200,
-      body: location,
+      body: events,
     };
   } catch (error) {
     // Logging and returning error response
