@@ -1,5 +1,6 @@
 const TICKETMASTER_API_URL = 'https://app.ticketmaster.com/discovery/v2/events';
 const { retrieveApiKey } = require('../utils/secretManager');
+const { formatDate } = require('../utils/formatDate');
 
 const getTicketMasterEvents = async (event) => {
   try {
@@ -8,6 +9,9 @@ const getTicketMasterEvents = async (event) => {
     // Parsing incoming event data
     const { location, startDateTime, endDateTime } =
       event.queryStringParameters;
+
+    const formattedStartDateTime = formatDate(startDateTime);
+    const formattedEndtDateTime = formatDate(endDateTime);
 
     // Input validation
     if (!location) {
@@ -20,7 +24,7 @@ const getTicketMasterEvents = async (event) => {
     }
 
     // Constructing URL for CoinGecko API
-    const url = `${TICKETMASTER_API_URL}?apikey=${ticketmaster_api_key}&countryCode=${location}&startDateTime=${startDateTime}&endDateTime${endDateTime}`;
+    const url = `${TICKETMASTER_API_URL}?apikey=${ticketmaster_api_key}&countryCode=${location}&startDateTime=${formattedStartDateTime}&endDateTime=${formattedEndtDateTime}`;
     // Fetching events price from Ticketmaster API
     const response = await fetch(url);
 
@@ -31,6 +35,12 @@ const getTicketMasterEvents = async (event) => {
 
     // Parsing response data
     const data = await response.json();
+    if (data._embedded === undefined) {
+      return {
+        statusCode: 204,
+        body: JSON.stringify([]),
+      };
+    }
     const events = data._embedded.events;
     const mappedEvents = events.map((event) => {
       return {
@@ -48,7 +58,9 @@ const getTicketMasterEvents = async (event) => {
           },
           timezone: event.dates.timezone,
         },
-        classification: event.classifications[0].genre.name,
+        classification: event.classifications[0]
+          ? event.classifications[0].genre.name
+          : 'N/A',
       };
     });
 
