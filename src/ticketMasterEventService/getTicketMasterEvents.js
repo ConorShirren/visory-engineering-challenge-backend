@@ -58,9 +58,12 @@ const getTicketMasterEvents = async (event) => {
           },
           timezone: event.dates.timezone,
         },
-        classification: event.classifications[0]
+        classification: event.classifications
           ? event.classifications[0].genre.name
           : 'N/A',
+        venue: event._embedded.venues
+          ? event._embedded.venues[0].name
+          : 'Location Unavailable',
       };
     });
 
