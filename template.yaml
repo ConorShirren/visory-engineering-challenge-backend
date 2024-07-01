@@ -13,7 +13,7 @@ Resources:
             - Effect: Allow
               Action:
                 - 'secretsmanager:GetSecretValue'
-              Resource: 'arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:ticketmaster_api_key'
+              Resource: 'arn:aws:secretsmanager:us-east-1:533267376166:secret:ticketmaster_api_key'
       Events:
         Api:
           Type: 'Api'
