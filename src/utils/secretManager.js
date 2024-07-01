@@ -1,7 +1,7 @@
-import {
+const {
   GetSecretValueCommand,
   SecretsManagerClient,
-} from '@aws-sdk/client-secrets-manager';
+} = require('@aws-sdk/client-secrets-manager');
 
 const secret_name = 'ticketmaster_api_key';
 
@@ -25,5 +25,4 @@ const retrieveApiKey = async () => {
 
   return response.SecretString;
 };
-
-export default retrieveApiKey;
+module.exports = { retrieveApiKey };
