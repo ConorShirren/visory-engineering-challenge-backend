@@ -8,11 +8,15 @@ Resources:
       Runtime: 'nodejs20.x'
       Timeout: 10
       MemorySize: 1024
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - 'secretsmanager:GetSecretValue'
+              Resource: 'arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:ticketmaster_api_key'
       Events:
         Api:
           Type: 'Api'
           Properties:
             Path: '/getTicketmasterEvents'
             Method: 'get'
-
- 
