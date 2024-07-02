@@ -14,6 +14,9 @@ The architecture of this submission consists of:
 - The angular application is deployed by manually uploaded ng build files to the S3 bucket via the console
 - The API expects a `location` field of type 2-Alpha Country Code (i.e. AU, US, IE, etc.), along with a `startDate` and `endDate` for search in format `YYY-MM-DD`
   - I  have provided a simple postman suite if you wish to test the API directly
+ 
+
+![gif](https://github.com/ConorShirren/visory-engineering-challenge-backend/assets/32966008/229b992a-f48e-4f86-a676-90a5432d6a44)
 
 
 ### Further Improvements
