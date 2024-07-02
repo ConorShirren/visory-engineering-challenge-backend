@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "5ab76a00-0415-4905-b86d-63e069800b42",
+		"name": "Visory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7856049"
+	},
+	"item": [
+		{
+			"name": "Ticketmaster API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://app.ticketmaster.com/discovery/v2/events?apikey=ADD_API_KEY_HERE&countryCode=IE&startDateTime=2024-06-27T09:00:00Z&endDateTime=2024-09-29T09:00:00Z",
+					"protocol": "https",
+					"host": [
+						"app",
+						"ticketmaster",
+						"com"
+					],
+					"path": [
+						"discovery",
+						"v2",
+						"events"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "ADD_API_KEY_HERE"
+						},
+						{
+							"key": "countryCode",
+							"value": "IE"
+						},
+						{
+							"key": "startDateTime",
+							"value": "2024-06-27T09:00:00Z"
+						},
+						{
+							"key": "endDateTime",
+							"value": "2024-09-29T09:00:00Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lambda Endpoint",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://qafi4l34q4.execute-api.us-east-1.amazonaws.com/Stage/getTicketmasterEvents",
+					"protocol": "https",
+					"host": [
+						"qafi4l34q4",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"Stage",
+						"getTicketmasterEvents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local Lambda",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/getTicketmasterEvents?location=us&startDateTime=2024-06-27&endDateTime=2024-06-29",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"getTicketmasterEvents"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "us"
+						},
+						{
+							"key": "startDateTime",
+							"value": "2024-06-27"
+						},
+						{
+							"key": "endDateTime",
+							"value": "2024-06-29"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
